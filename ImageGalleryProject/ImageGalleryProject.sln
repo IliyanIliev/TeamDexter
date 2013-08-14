@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gallery.Models", "Gallery.M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gallery.Data", "Gallery.Data\Gallery.Data.csproj", "{94421280-1570-4C37-835D-5DC875580110}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gallery.Repositories", "Gallery.Repositories\Gallery.Repositories.csproj", "{F1E3D5AB-783C-4B36-B6FC-EF77740879D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gallery.ASPNetWebAPI", "Gallery.ASPNetWebAPI\Gallery.ASPNetWebAPI.csproj", "{CDF91BD2-B321-4C48-99FA-939F22305290}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{94421280-1570-4C37-835D-5DC875580110}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94421280-1570-4C37-835D-5DC875580110}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94421280-1570-4C37-835D-5DC875580110}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1E3D5AB-783C-4B36-B6FC-EF77740879D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1E3D5AB-783C-4B36-B6FC-EF77740879D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1E3D5AB-783C-4B36-B6FC-EF77740879D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1E3D5AB-783C-4B36-B6FC-EF77740879D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDF91BD2-B321-4C48-99FA-939F22305290}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDF91BD2-B321-4C48-99FA-939F22305290}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDF91BD2-B321-4C48-99FA-939F22305290}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDF91BD2-B321-4C48-99FA-939F22305290}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

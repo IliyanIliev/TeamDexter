@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Gallery.Models
 {
@@ -22,6 +23,6 @@ namespace Gallery.Models
 
         public string Password { get; set; }
 
-        public virtual Gallery Gallery { get; set; }
+        public virtual ICollection<Gallery> Galleries { get; set; }
     }
 }
