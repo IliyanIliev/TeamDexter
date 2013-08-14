@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gallery.ASPNetWebAPI.Models
 {
-    class AlbumModel
+    public class AlbumModel
     {
         public int ID { get; set; }
 

@@ -28,7 +28,5 @@ namespace Gallery.ASPNetWebAPI.Controllers
             return this.unitOfWork.ImagesRepository.All()
                 .Select(ImageModel.FromImage).ToList();
         }
-
-        public 
     }
 }

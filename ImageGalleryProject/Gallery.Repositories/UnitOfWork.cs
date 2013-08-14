@@ -15,6 +15,7 @@ namespace Gallery.Repositories
         private EfRepository<Album> albumsRepository;
         private EfRepository<Image> imagesRepository;
         private EfRepository<Comment> commentsRepository;
+        private EfRepository<Gallery.Models.Gallery> galleriesRepository;
         bool disposed;
 
         public EfRepository<User> UsersRepository
@@ -27,6 +28,19 @@ namespace Gallery.Repositories
                 }
 
                 return this.usersRepository;
+            }
+        }
+
+        public EfRepository<Gallery.Models.Gallery> GalleriesRepository
+        {
+            get
+            {
+                if (this.galleriesRepository == null)
+                {
+                    this.galleriesRepository = new EfRepository<Gallery.Models.Gallery>(context);
+                }
+
+                return this.galleriesRepository;
             }
         }
 
