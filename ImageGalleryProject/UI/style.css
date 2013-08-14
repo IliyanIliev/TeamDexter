@@ -10,10 +10,6 @@
 }
 
 
-#zoom {
-	
-	//border: 1px solid #0f0;
-}
 
 
 #zoom img {
@@ -25,13 +21,13 @@
 
 
 .content{
-	border: 1px solid #000;
+	/*border: 1px solid #000;*/
 	width: 1050px;
 	height: 100%;
 	display: inline-block;
 }
 #navmenu {
-	border: 1px solid #f00;
+	/*border: 1px solid #f00;*/
 	width: 150px;
 	height: 100%;
 	float: left;
@@ -40,7 +36,7 @@
 #app {
 	width: 1250px;
 	display: inline-block;
-	border: 1px solid #00f;
+	/*border: 1px solid #00f;*/
 	
 }
 #CreateFolder,#FolderName {
@@ -66,4 +62,11 @@
 	width: 100%;
 	background: #0f0;
 	
+}
+div {
+	display: inline-block;
+}
+#notifications {
+	background-color: #0ff;
+	display: block;
 }

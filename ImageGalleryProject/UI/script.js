@@ -2,6 +2,7 @@ var zoom = $("#zoom");
 var createFolder = $("#CreateFolder");
 var img = $(".content>img");
 var folderID =1;
+var currentId;
 Zoom();
 CreateFolder();
 
@@ -30,19 +31,28 @@ $("#AddFolder").click(function(event) {
 function CreateFolder() {
 	createFolder.click(function(event) {
 		var z = $("#FolderName").val();
-		$(".content").append("<div class='folder' id='"+folderID+"'><img src='folder.png'"+z+"</div>")
+		$(".content").append("<div class='folder' id='"+folderID+"'><img src='folder.png'>"+z+"</div>")
 		folderID++;
 	});
 }
 
 
-
+function OpenFolder(){
 $("#app").delegate('.folder', 'click', function(event) {
 	$(".content img ").addClass('hidden');
 	
-	var currentId = $(this).attr('id');
-	$("#"+currentId).append('<div> <img src="1.jpg"></div>')
-//$("").append(yy);
-$(".folder>.folderContent img").addClass('selected')
+	currentId = $(this).attr('id');
+//	$("#"+currentId).append("<div><img src='1.jpg'><a name ='"+currentId+"'></a> </div>")
+	$("#menu").append("<li><a href='#"+currentId+"' >" + currentId +"</a></li>")
 });
-		$("#menu").append('<li><a href="#">asd</a></li>')
+//		
+}
+function AddImage() {
+	$("#AddImage").click(function(event) {
+		$("#"+currentId).append("<div><img src='1.jpg'><a name ='"+currentId+"'></a> </div>")
+
+	});
+	
+}
+OpenFolder();
+AddImage();
