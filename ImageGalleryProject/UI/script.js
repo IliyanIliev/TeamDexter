@@ -43,5 +43,6 @@ $("#app").delegate('.folder', 'click', function(event) {
 	var currentId = $(this).attr('id');
 	$("#"+currentId).append('<div> <img src="1.jpg"></div>')
 //$("").append(yy);
-$(".folder>.content img").addClass('selected')
+$(".folder>.folderContent img").addClass('selected')
 });
+		$("#menu").append('<li><a href="#">asd</a></li>')

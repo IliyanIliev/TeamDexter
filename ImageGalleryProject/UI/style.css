@@ -30,7 +30,7 @@
 	height: 100%;
 	display: inline-block;
 }
-#menu {
+#navmenu {
 	border: 1px solid #f00;
 	width: 150px;
 	height: 100%;
@@ -59,4 +59,11 @@
 }
 .selected {
 	display: inline-block;
+}
+ .ui-menu { width: 150px; }
+ .folder>.folderContent{
+	border: 1px solid #000;
+	width: 100%;
+	background: #0f0;
+	
 }
