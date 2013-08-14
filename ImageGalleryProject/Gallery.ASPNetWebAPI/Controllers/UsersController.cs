@@ -11,7 +11,7 @@ using Gallery.ASPNetWebAPI.Models;
 
 namespace Gallery.ASPNetWebAPI.Controllers
 {
-   public class UserController : BaseApiController
+   public class UsersController : BaseApiController
     {
         /*
 {
