@@ -12,5 +12,6 @@ namespace Gallery.ASPNetWebAPI.Controllers
         {
             return View();
         }
+
     }
 }
