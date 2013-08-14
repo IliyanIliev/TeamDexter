@@ -133,6 +133,7 @@ var controllers = (function () {
 }());
 
 $(function () {
+    debugger
 	var controller = controllers.get();
 	controller.loadUI("#content");
 });
