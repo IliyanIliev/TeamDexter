@@ -5,10 +5,12 @@ img {
 	padding-top: 5px;
 }
 
+
 #zoom {
 	
-	border: 1px solid #0f0;
+	//border: 1px solid #0f0;
 }
+
 
 #zoom img {
 	width: 500px;
@@ -36,4 +38,10 @@ img {
 	display: inline-block;
 	border: 1px solid #00f;
 	
+}
+#CreateFolder,#FolderName {
+	display: none;
+}
+.folder{
+	display: inline-block;
 }
