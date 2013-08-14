@@ -8,7 +8,6 @@ namespace Gallery.ASPNetWebAPI.Models
 {
     public class CommentFullModel : CommentModel
     {
-        public User Author { get; set; }
-
+        public UserModel Author { get; set; }
     }
 }
