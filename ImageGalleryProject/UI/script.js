@@ -1,43 +1,47 @@
+var zoom = $("#zoom");
+var createFolder = $("#CreateFolder");
+var img = $(".content>img");
+var folderID =1;
 Zoom();
 CreateFolder();
+
+
 function Zoom() {
 
 
-	$("img").click(function(event) {
+	img.click(function(event) {
 		var x = $(this).attr('src');
-		$("#zoom").html("<img src ='" + x + "'>")
+		zoom.html("<img src ='" + x + "'>")
 	});
-
-
-
-	$("#zoom").click(function(event) {
+	zoom.click(function(event) {
 		var x = $(this).attr('src');
-		$("#zoom").html("");
+		zoom.html("");
 
 	});
-
-	/*
-	$("img").mouseleave(function(event) {
-		 $("#zoom").html("");
-	});
-
-*/
-	/*$(document).on("contextmenu", "img", function(e){
-   $("#zoom").html("");
-   return false;
-});*/
 }
 
 $("#AddFolder").click(function(event) {
 
-	$("#CreateFolder").css('display', 'inline-block');
+	createFolder.css('display', 'inline-block');
 	$("#FolderName").css('display', 'inline-block');
 
 });
 
 function CreateFolder() {
-	$("#CreateFolder").click(function(event) {
+	createFolder.click(function(event) {
 		var z = $("#FolderName").val();
-		$("#content").append("<div class='folder'><img src='folder.png'>" + z + "</div>")
+		$(".content").append("<div class='folder' id='"+folderID+"'><img src='folder.png'"+z+"</div>")
+		folderID++;
 	});
 }
+
+
+
+$("#app").delegate('.folder', 'click', function(event) {
+	$(".content img ").addClass('hidden');
+	
+	var currentId = $(this).attr('id');
+	$("#"+currentId).append('<div> <img src="1.jpg"></div>')
+//$("").append(yy);
+$(".folder>.content img").addClass('selected')
+});

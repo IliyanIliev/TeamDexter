@@ -1,6 +1,10 @@
-img {
-	width: 200px;
-	display: inline-block;
+*{
+	margin: 0;
+	padding:0;
+}
+
+ img {
+	width: 200px;	
 	padding-left: 5px;
 	padding-top: 5px;
 }
@@ -20,7 +24,7 @@ img {
 	}
 
 
-#content{
+.content{
 	border: 1px solid #000;
 	width: 1050px;
 	height: 100%;
@@ -28,7 +32,7 @@ img {
 }
 #menu {
 	border: 1px solid #f00;
-	width: 100px;
+	width: 150px;
 	height: 100%;
 	float: left;
 	display: inline-block;
@@ -42,6 +46,17 @@ img {
 #CreateFolder,#FolderName {
 	display: none;
 }
-.folder{
+
+.folder {
+	display: inline-block;
+	
+	text-align: center;
+	word-wrap:break-word;
+	padding-left: 5px;
+}
+.hidden {
+	display: none;
+}
+.selected {
 	display: inline-block;
 }
