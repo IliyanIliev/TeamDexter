@@ -22,7 +22,7 @@ namespace Gallery.ASPNetWebAPI.Controllers
        */
         [HttpPost]
         [ActionName("register")]
-        public HttpResponseMessage RegisterUser(UserRegisterModel user)
+        public HttpResponseMessage RegisterUser([FromBody]UserRegisterModel user)
         {
             var responseMsg = this.PerformOperation(() =>
             {
@@ -42,7 +42,7 @@ namespace Gallery.ASPNetWebAPI.Controllers
 
         [HttpPost]
         [ActionName("login")]
-        public HttpResponseMessage LoginUser(UserLoginModel user)
+        public HttpResponseMessage LoginUser([FromBody]UserLoginModel user)
         {
             var responseMsg = this.PerformOperation(() =>
             {
