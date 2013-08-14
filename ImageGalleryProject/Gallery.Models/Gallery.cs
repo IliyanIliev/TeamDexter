@@ -17,6 +17,8 @@ namespace Gallery.Models
 
         public int ID { get; set; }
 
+        public string Name { get; set; }
+
         public virtual ICollection<Album> Albums { get; set; }
 
         public virtual ICollection<Image> Images { get; set; }

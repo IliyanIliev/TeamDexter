@@ -8,5 +8,10 @@ namespace Gallery.ASPNetWebAPI.Models
 {
     public class ImageFullModel : ImageModel
     {
+        public ImageFullModel()
+        {
+            this.Comments = new HashSet<CommentModel>();
+        }
+        public ICollection<CommentModel> Comments { get; set; }
     }
 }
