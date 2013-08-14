@@ -31,9 +31,9 @@ namespace Gallery.ASPNetWebAPI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            GalleryContext context = new GalleryContext();
-            context.Comments.Add(new Comment() { Text = "text" });
-            context.SaveChanges();
+            //GalleryContext context = new GalleryContext();
+            //context.Comments.Add(new Comment() { Text = "text" });
+            //context.SaveChanges();
         }
     }
 }
