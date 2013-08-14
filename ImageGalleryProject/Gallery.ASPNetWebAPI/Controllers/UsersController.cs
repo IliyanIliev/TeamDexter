@@ -6,7 +6,6 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Gallery.Models;
-using Gallery.Repositories;
 using System.Globalization;
 using Gallery.ASPNetWebAPI.Models;
 

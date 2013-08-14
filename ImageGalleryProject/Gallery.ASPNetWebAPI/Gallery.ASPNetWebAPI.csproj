@@ -170,6 +170,10 @@
     <Compile Include="Controllers\ImageModel.cs" />
     <Compile Include="Controllers\UserFullModel.cs" />
     <Compile Include="Controllers\UserModel.cs" />
+    <Compile Include="Controllers\GalleriesController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImagesController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -188,6 +192,8 @@
     <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Models\GalleryFullModel.cs" />
     <Compile Include="Models\GalleryModel.cs" />
+    <Compile Include="Models\CommentFullModel.cs" />
+    <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Models\ImageFullModel.cs" />
     <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Models\UserFullModel.cs" />
