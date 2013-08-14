@@ -1,7 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.20617.1 PREVIEW
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gallery.Models", "Gallery.Models\Gallery.Models.csproj", "{00708C9A-21E7-46EE-B34D-46F3C9A686E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gallery.Data", "Gallery.Data\Gallery.Data.csproj", "{94421280-1570-4C37-835D-5DC875580110}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +17,10 @@ Global
 		{00708C9A-21E7-46EE-B34D-46F3C9A686E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00708C9A-21E7-46EE-B34D-46F3C9A686E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00708C9A-21E7-46EE-B34D-46F3C9A686E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94421280-1570-4C37-835D-5DC875580110}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94421280-1570-4C37-835D-5DC875580110}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94421280-1570-4C37-835D-5DC875580110}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94421280-1570-4C37-835D-5DC875580110}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
