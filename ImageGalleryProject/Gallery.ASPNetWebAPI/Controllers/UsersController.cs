@@ -11,48 +11,78 @@ using Gallery.ASPNetWebAPI.Models;
 
 namespace Gallery.ASPNetWebAPI.Controllers
 {
-    public class UsersController : ApiController
+   public class UserController : BaseApiController
     {
-        private UnitOfWork unitOfWork;
-
-        public UsersController()
+        /*
+{
+   "username": "Dodo",
+   "nickname": "Doncho Minkov",
+   "authCode": "6fa9133efe05348e430bd5a4585b595f0cb6cba3"
+}
+       */
+        [HttpPost]
+        [ActionName("register")]
+        public HttpResponseMessage RegisterUser(UserRegisterModel user)
         {
-            this.unitOfWork = new UnitOfWork();
+            var responseMsg = this.PerformOperation(() =>
+            {
+                UsersRepository.CreateUser(user.Username, user.FirstName, user.LastName, user.AuthCode);
+                string firstName = string.Empty;
+                string lastName = string.Empty;
+                var sessionKey = UsersRepository.LoginUser(user.Username, user.AuthCode, out firstName, out lastName);
+                return new UserLoggedModel()
+                {
+                    FirstName = firstName,
+                    LastName = lastName,
+                    SessionKey = sessionKey
+                };
+            });
+            return responseMsg;
         }
 
-        public UsersController(UnitOfWork unitOfWork)
+        [HttpPost]
+        [ActionName("login")]
+        public HttpResponseMessage LoginUser(UserLoginModel user)
         {
-            this.unitOfWork = unitOfWork;
+            var responseMsg = this.PerformOperation(() =>
+            {
+                string firstName = string.Empty;
+                string lastName = string.Empty;
+
+                var sessionKey = UsersRepository.LoginUser(user.Username, user.AuthCode, out firstName, out lastName);
+                return new UserLoggedModel()
+                {
+                    FirstName = firstName,
+                    LastName = lastName,
+                    SessionKey = sessionKey
+                };
+            });
+            return responseMsg;
         }
 
-        public HttpResponseMessage PostUser(User user)
+        [HttpGet]
+        [ActionName("logout")]
+        public HttpResponseMessage LogoutUser(string sessionKey)
         {
-            this.unitOfWork.UsersRepository.Add(user);
-            HttpResponseMessage message = this.Request.CreateResponse(HttpStatusCode.Created);
-            message.Headers.Location =
-                new Uri(this.Request.RequestUri + user.ID.ToString(CultureInfo.InvariantCulture));
-            return message;
+            var responseMsg = this.PerformOperation(() =>
+            {
+                UsersRepository.LogoutUser(sessionKey);
+            });
+            return responseMsg;
         }
 
-        public ICollection<UserModel> GetAll()
-        {
-            var userEntities = unitOfWork.UsersRepository.All();
-            var userModels = from userEntity in userEntities
-                            select new UserModel()
-                            {
-                                ID = userEntity.ID,
-                                FirstName = userEntity.FirstName,
-                                LastName = userEntity.LastName,
-                                Username = userEntity.Username
-                            };
+        //[HttpGet]
+        //[ActionName("scores")]
+        //public HttpResponseMessage GetAllUsers(string sessionKey)
+        //{
+        //    var responseMsg = this.PerformOperation(() =>
+        //    {
+        //        UsersRepository.LoginUser(sessionKey);
+        //        IEnumerable<UserScore> users = UsersRepository.GetAllUsers();
 
-            return userModels.ToList();
-
-        }
-
-        public User Get(int id)
-        {
-            return unitOfWork.UsersRepository.Get(id);
-        }
+        //        return users;
+        //    });
+        //    return responseMsg;
+        //}
     }
 }

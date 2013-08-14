@@ -34,7 +34,7 @@ namespace Gallery.ASPNetWebAPI.Models
             };
         }
 
-        public Comment CreateCommment()
+        public virtual Comment CreateCommment()
         {
             return new Comment 
             { 

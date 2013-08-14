@@ -11,7 +11,7 @@ namespace Gallery.ASPNetWebAPI
         {
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
+                routeTemplate: "api/{controller}/{action}/{sessionKey}",
                 defaults: new { id = RouteParameter.Optional }
             );
 

@@ -18,10 +18,10 @@ namespace Gallery.Models
 
         public string Username { get; set; }
 
-        [StringLength(50)]
+        [StringLength(40)]
         public string AuthCode { get; set; }
 
-        public string Password { get; set; }
+        public string SessionKey { get; set; }
 
         public virtual ICollection<Gallery> Galleries { get; set; }
     }
