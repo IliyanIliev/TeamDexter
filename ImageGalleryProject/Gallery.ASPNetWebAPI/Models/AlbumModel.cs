@@ -31,14 +31,19 @@ namespace Gallery.ASPNetWebAPI.Models
 
     public class AlbumModel
     {
+        [DataMember(Name = "id")]
         public int ID { get; set; }
 
+        [DataMember(Name = "title")]
         public string Title { get; set; }
 
+        [DataMember(Name = "dateCreated")]
         public DateTime? DateCreated { get; set; }
 
+        [DataMember(Name = "dateModified")]
         public DateTime? DateModified { get; set; }
 
+        [DataMember(Name = "size")]
         public double Size { get; set; }
 
         internal static AlbumModel CreateModel(Gallery.Models.Album album)

@@ -11,14 +11,19 @@ namespace Gallery.ASPNetWebAPI.Models
     [DataContract]
     public class ImageModel
     {
+        [DataMember(Name = "id")]
         public int ID { get; set; }
 
+        [DataMember(Name = "title")]
         public string Title { get; set; }
 
+        [DataMember(Name = "dateUploaded")]
         public DateTime? DateUploaded { get; set; }
 
+        [DataMember(Name = "url")]
         public string Url { get; set; }
 
+        [DataMember(Name = "size")]
         public double Size { get; set; }
 
         public static Expression<Func<Image, ImageModel>> FromImage

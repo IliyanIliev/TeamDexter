@@ -191,6 +191,7 @@
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
+    <Compile Include="Repositories\CommentsRepository.cs" />
     <Compile Include="Repositories\EfRepository.cs" />
     <Compile Include="Repositories\GalleryContex.cs" />
     <Compile Include="Repositories\GalleryRepository.cs" />
