@@ -73,12 +73,12 @@ namespace Gallery.ASPNetWebAPI.Controllers
         // api/Images/add/{sessionKey}
         [HttpPost]
         [ActionName("add")]
-        public HttpResponseMessage Add(string sessionKey, [FromBody] ImageModel image)
+        public HttpResponseMessage Add(string sessionKey, [FromBody] ImageModel image, int? albumID = null)
         {
             var response = this.PerformOperation(() => 
             {
                 var userID = UsersRepository.LoginUser(sessionKey);
-                ImagesRepository.AddImage(image, userID);
+                ImagesRepository.AddImage(image, albumID, userID);
             });
             return response;
         }

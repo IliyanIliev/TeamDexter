@@ -27,12 +27,8 @@ namespace Gallery.ASPNetWebAPI.Controllers
         {
             var responseMsg = this.PerformOperation(() =>
             {
-                AlbumRepository.CreateAlbum(album.Title);
-                string title = string.Empty;
-                return new AlbumModel()
-                {
-                    Title = title,
-                };
+                var userID = UsersRepository.LoginUser(sessionKey);
+                AlbumRepository.CreateAlbum(album, userID);
             });
             return responseMsg;
 

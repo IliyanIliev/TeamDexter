@@ -94,7 +94,7 @@ namespace Gallery.ASPNetWebAPI.Repositories
             }
         }
 
-        public static void AddImage(ImageModel image, int userID)
+        public static void AddImage(ImageModel image, int? albumID, int userID)
         {
             using (var context = new Gallery.Data.GalleryContext())
             {
@@ -111,6 +111,15 @@ namespace Gallery.ASPNetWebAPI.Repositories
                     Size = image.Size,
                     DateUploaded = image.DateUploaded
                 };
+
+                context.Users.Find(userID).Galleries.First().Images.Add(newImage);
+                if (albumID != null)
+                {
+                    context.Users.Find(userID).Galleries.First().Albums
+                        .First(a => a.ID == albumID).Images.Add(newImage);
+                   
+                }
+
                 context.Images.Add(newImage);
                 context.SaveChanges();
             }

@@ -40,13 +40,13 @@ namespace Gallery.Repositories
             }
         }
 
-        public static void CreateAlbum(string albumName)
+        public static void CreateAlbum(AlbumModel album, int userID)
         {
-            ValidateAlbumName(albumName);
+            ValidateAlbumName(album.Title);
 
             using (GalleryContext context = new GalleryContext())
             {
-                var albumNameToLower = albumName.ToLower();
+                var albumNameToLower = album.Title.ToLower();
 
                 //var dbUser = context.Users.FirstOrDefault(u => u.Username.ToLower() == usernameToLower);
                 var dbAlbum = context.Albums.FirstOrDefault(a => a.Title.ToLower() == albumNameToLower);
@@ -61,8 +61,11 @@ namespace Gallery.Repositories
                 dbAlbum = new Album()
                 {
                     Title = albumNameToLower,
-
+                    DateCreated = album.DateCreated,
+                    DateModified = album.DateModified
                 };
+
+                context.Users.Find(userID).Galleries.First().Albums.Add(dbAlbum);
                 context.Albums.Add(dbAlbum);
                 context.SaveChanges();
             }
