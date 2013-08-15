@@ -78,5 +78,26 @@ namespace Gallery.Repositories
             
             return result;
         }
+
+        internal static  AlbumFullModel GetAlbumByID(int albumID, int userID)
+        {
+            using (var context = new GalleryContext())
+            {
+                var images = context.Albums.FirstOrDefault(a => a.ID == albumID);
+
+                return new AlbumFullModel
+                {
+                    Title = images.Title,
+                    Images = 
+                        (from i in images.Images
+                        select new ImageModel
+                        {
+                            ID=i.ID,
+                            Title=i.Title,
+                            Url=i.Url
+                        }).ToList()       
+                    };
+                };
+            }
+        }
     }
-}

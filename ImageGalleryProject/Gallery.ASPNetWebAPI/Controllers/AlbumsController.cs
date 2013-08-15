@@ -35,12 +35,12 @@ namespace Gallery.ASPNetWebAPI.Controllers
         }
         [HttpGet]
         [ActionName("get")]
-
-        public HttpResponseMessage PreviewAlbums()
+        public HttpResponseMessage GetAlbum(int albumID, string sessionKey)
         {
             var responseMsg = this.PerformOperation(() =>
             {
-                var previewAlbums = AlbumRepository.GetAllAlbums();
+                var userID = UsersRepository.LoginUser(sessionKey);
+                var previewAlbums = AlbumRepository.GetAlbumByID(albumID, userID);
                   return previewAlbums;
             });
             return responseMsg;

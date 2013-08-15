@@ -119,43 +119,18 @@ var controllers = (function () {
 
 			})
 
-			//document.getElementById("save").addEventListener("click", function (e) {
-			//    options = {
+			wrapper.on("click", ".image", function (ev) {
+			    var imageID = $(ev.target).attr("data-image-id");
+			    self.persister.images.getImageByID(imageID, function (data) {
+			        var image = data;
+			        $(selector).appendTo("<img src='" + image.url + "'/>");
+			    }, function (error) { });
+			});
 
-			//        success: function (files) {
-			//            alert(files[0].link)
-			//        },
+			wrapper.on("click", ".folder", function (ev) {
+			    var albumID = $(ev.target).attr("data-album-id");
 
-			//        cancel: function () {
-
-			//        },
-			//        linkType: "direct",
-			//        multiselect: false,
-			//    }
-
-			//    Dropbox.choose(options);
-			//}, false);
-
-			//wrapper.on("click", "#uploadToDropbox", function (ev) {
-			//    options = {
-			//        files: [
-            //            {
-            //                'url': 'http://telerikacademy.com/Content/Images/news-img01.png',
-
-            //            },
-            //            {
-            //                'url': 'http://i1.ytimg.com/vi/5Awc2yw3G5A/0.jpg',
-            //            }
-
-			//        ],
-			//        success: function () { },
-			//        progress: function (progress) { },
-			//        cancel: function () { },
-			//        error: function (err) { }
-			//    }
-
-			//    Dropbox.save(options);
-			//}, false);
+			});
 
 			wrapper.on("click", "#open-games-container a", function () {
 				$("#game-join-inputs").remove();
