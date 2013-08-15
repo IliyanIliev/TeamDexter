@@ -18,3 +18,10 @@
 #menu{
     display:inline-block;
 }
+
+#imageHolder{
+    margin-top:50px;
+    float:right;
+    width:80%;
+
+}

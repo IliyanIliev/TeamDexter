@@ -229,17 +229,18 @@ var ui = (function () {
             html += "</li>";
         }
 
-        var imagesLength = gallery.images.length;
-        var images = gallery.images;
+        //var imagesLength = gallery.images.length;
+        //var images = gallery.images;
 
-        for (var i = 0; i < imagesLength; i++) {
-            html += '<li class="ui-menu-item" role="presentation">';
-            html += '<a href="#" class="image" data-image-id="' + images[i].ID + '">' + images[i].Title + "</a>";
-            html += "</li>"
-        }
+        //for (var i = 0; i < imagesLength; i++) {
+        //    html += '<li class="ui-menu-item" role="presentation">';
+        //    html += '<a href="#" class="image" data-image-id="' + images[i].ID + '">' + images[i].Title + "</a>";
+        //    html += "</li>"
+        //}
 
         //html += "</ul></li>";
         html += "</ul>";
+        html += "<div id='imageHolder'></div>";
         return html;
     }
 

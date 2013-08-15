@@ -104,6 +104,7 @@ var controllers = (function () {
 			    self.persister.gallery.getSingle(
                           username,
                           function (data) {
+                              console.log(data);
                               var gallery = data;
                               self.loadGallery(selector, gallery);
                           },
@@ -128,10 +129,30 @@ var controllers = (function () {
 			});
 
 			wrapper.on("click", ".folder", function (ev) {
+			    
 			    var albumID = $(ev.target).attr("data-album-id");
+			    self.persister.album.get(albumID, function (data) {
+			        if (data.images.length!=0) {
+			            for (var i = 0; i < data.images.length; i++) {
+			                $(ev.target).append("<li class='image-url'><a href='#' data-url=" + data.images[i].url + "'>Image " + data.images[i].id + "</a></li>");
+			            }
 
+			        }
+			    }, function (error) { });
 			});
 
+			wrapper.on("click", ".image-url", function (ev) {
+			    var imageUrl = $(ev.target).attr("data-url");
+			    $("#imageHolder").html("<img src='" + imageUrl + "'/>"), function (error) { }     
+			})
+
+		//	<ul class="ui-menu ui-widget ui-widget-content ui-corner-all" role="menu" aria-expanded="false" style="display: none; top: 105.96875px; left: 314px;" aria-hidden="true">
+		//	<li class="ui-state-disabled ui-menu-item" role="presentation" aria-disabled="true"><a href="#" id="ui-id-9" class="ui-corner-all" tabindex="-1" role="menuitem">Ada</a></li>
+		//	<li class="ui-menu-item" role="presentation"><a href="#" id="ui-id-10" class="ui-corner-all" tabindex="-1" role="menuitem">Saarland</a></li>
+		//	<li class="ui-menu-item" role="presentation"><a href="#" id="ui-id-11" class="ui-corner-all" tabindex="-1" role="menuitem">Salzburg</a></li>
+		//</ul>
+
+            // ===============================================================================================
 			wrapper.on("click", "#open-games-container a", function () {
 				$("#game-join-inputs").remove();
 				var html =

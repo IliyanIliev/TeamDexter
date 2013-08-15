@@ -178,6 +178,10 @@ var persister = (function () {
             httpRequester.postJSON(url, albumData, function (data) {
                 success(data);
             }, error);
+        },
+        get: function (albumID, success, error) {
+            var url = this.rootUrl + "get/" + sessionKey + "?albumID=" + albumID;
+            httpRequester.getJSON(url, success, error);
         }
     });
 
