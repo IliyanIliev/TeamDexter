@@ -15,11 +15,47 @@
     <script src="Scripts/additional-ui.js"></script>
     <link href="Content/bootstrap.css" rel="stylesheet" />
     <link href="Styles/styles.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://www.dropbox.com/static/api/1/dropins.js" id="dropboxjs" data-app-key="65lhystx0tgqwbm"></script>
+
 </head>
 <body>
     <div id="wrapper">
         <div id="content">
         </div>
     </div>
+    <input id="db-chooser" type="dropbox-chooser" name="selected-file"  data-link-type="direct"/>
+    <button id="uploadToDropbox">Upload to Dropbox </button>
+    <script type="text/javascript">
+		
+        // add an event listener to a Chooser button
+        document.getElementById("db-chooser").addEventListener("DbxChooserSuccess",
+            function(e) {
+                var link =  e.files[0].link;
+                alert(link);
+            }, false);
+    </script>
+    <script>
+        document.getElementById("uploadToDropbox").addEventListener("click", function (e) {
+            options = {
+                files: [
+                    {
+                        'url': 'http://telerikacademy.com/Content/Images/news-img01.png',
+
+                    },
+                    {
+                        'url': 'http://i1.ytimg.com/vi/5Awc2yw3G5A/0.jpg',
+                    }
+
+                ],
+                success: function () { },
+                progress: function (progress) { },
+                cancel: function () { },
+                error: function (err) { }
+            }
+
+            Dropbox.save(options);
+        }, false);
+
+    </script>
 </body>
 </html>

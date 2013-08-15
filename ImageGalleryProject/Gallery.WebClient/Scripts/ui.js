@@ -173,15 +173,14 @@ var ui = (function () {
         html += '<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">\
           <span class="icon-bar"></span>\
           <span class="icon-bar"></span>\
-          <span class="icon-bar"></span></a>\
-';
+          <span class="icon-bar"></span></a>';
         html += '<a class="brand" href="#">' + localStorage.getItem("username") + '</a>';
-    
         var usersLength = users.length;
         html += '<div class="nav-collapse collapse navbar-responsive-collapse"><ul class="nav"><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">People<b.caret></b></a><ul class="dropdown-menu">';
         for (var i = 0; i < usersLength; i++) {
             html += '<li><a href="#" data-username="' + users[i].username + '" class="person">' + users[i].firstName + " " + users[i].lastName + "</a></li>";
         }
+     
         html += '</div></div></div></div></header>';
         return html;
     }
@@ -245,3 +244,4 @@ var ui = (function () {
         getMessages: buildMessages,
     }
 })();
+
