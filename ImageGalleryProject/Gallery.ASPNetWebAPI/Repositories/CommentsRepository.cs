@@ -9,14 +9,25 @@ namespace Gallery.ASPNetWebAPI.Repositories
 {
     public class CommentsRepository
     {
-        internal static IEnumerable<CommentModel> GetAll(string sessionKey)
+        internal static IEnumerable<CommentFullModel> GetAll(int imageID, int userID)
         {
+            using (var context = new GalleryContext())
+            {
+                var comments = context.Comments.Where(c => c.Image.ID == imageID);
+                var result =
+                    (from c in comments
+                     select new CommentFullModel
+                     {
+                         Text = c.Text,
+                         Author = new UserModel
+                         {
+                             ID = c.Author.ID,
+                             Username = c.Author.Username
+                         }
+                     }).ToList();
 
-            var context = new GalleryContext();
-
-            var result = context.Comments.Select(CommentModel.FromComment).ToList();
-
-            return result;
+                return result;
+            }
         }
 
         public static void CreateComment(int? imageId, string text, int userId)

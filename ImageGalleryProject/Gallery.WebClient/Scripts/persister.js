@@ -28,6 +28,7 @@ var persister = (function () {
             this.gallery = new GalleryPersister(this.rootUrl);
             this.album = new AlbumPersister(this.rootUrl);
             this.images = new ImagePersister(this.rootUrl);
+            this.comments = new CommentPersister(this.rootUrl);
             this.messages = new MessagesPersister(this.rootUrl);
             this.battle = new BattlePersister(this.rootUrl);
         },
@@ -191,6 +192,16 @@ var persister = (function () {
         },
         getImageByID: function (imageID, success, error) {
             var url = this.rootUrl + "byImageID/" + sessionKey + "?id=" + imageID;
+            httpRequester.getJSON(url, success, error);
+        }
+    });
+
+    var CommentPersister = Class.create({
+        init: function (url) {
+            this.rootUrl = url + "Comments/";
+        },
+        get: function (imageID, success, error) {
+            var url = this.rootUrl + "get/" + sessionKey + "?id=" + imageID;
             httpRequester.getJSON(url, success, error);
         }
     });

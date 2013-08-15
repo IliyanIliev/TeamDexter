@@ -143,8 +143,18 @@ var controllers = (function () {
 
 			wrapper.on("click", ".image-url", function (ev) {
 			    var imageUrl = $(ev.target).attr("data-url");
-			    $("#imageHolder").html("<img src='" + imageUrl + "'/>"), function (error) { }     
-			})
+			    var imagesId = $(ev.target).attr("data-id");
+			    $("#imageHolder").html("<img src='" + imageUrl + "'/>");
+			    //$("#imageHolder").html += "<div id='allComments'>";
+			    //self.persister.comments.get(imagesId,function(data){
+			    //    for (var i = 0; i < data.length; i++) {
+			    //        $("#imageHolder").html += data[i].username;
+			    //    }
+			    //    $("#imageHolder").html += "</div>";
+			    //},function(){});
+
+
+			});
 
 		//	<ul class="ui-menu ui-widget ui-widget-content ui-corner-all" role="menu" aria-expanded="false" style="display: none; top: 105.96875px; left: 314px;" aria-hidden="true">
 		//	<li class="ui-state-disabled ui-menu-item" role="presentation" aria-disabled="true"><a href="#" id="ui-id-9" class="ui-corner-all" tabindex="-1" role="menuitem">Ada</a></li>

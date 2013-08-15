@@ -16,11 +16,12 @@ namespace Gallery.ASPNetWebAPI.Controllers
     {
         [HttpGet]
         [ActionName("get")]
-        public HttpResponseMessage GetComments(string sessionKey)
+        public HttpResponseMessage GetComments(int imageID, string sessionKey)
         {
             var responseMsg = this.PerformOperation(() =>
             {
-                var previewComments = CommentsRepository.GetAll(sessionKey);
+                var userID = UsersRepository.LoginUser(sessionKey);
+                var previewComments = CommentsRepository.GetAll(imageID, userID);
                 return previewComments;
             });
             return responseMsg;
