@@ -1,6 +1,6 @@
 ﻿/// <reference path="class.js" />
+/// <reference path="jquery-2.0.3.js" />
 /// <reference path="persister.js" />
-/// <reference path="jquery-2.0.2.js" />
 /// <reference path="ui.js" />
 
 var controllers = (function () {
@@ -11,7 +11,7 @@ var controllers = (function () {
 		},
 		loadUI: function (selector) {
 			if (this.persister.isUserLoggedIn()) {
-				this.loadGameUI(selector);
+				this.loadGalleryUI(selector);
 			}
 			else {
 				this.loadLoginFormUI(selector);
@@ -22,11 +22,15 @@ var controllers = (function () {
 		    var loginFormHtml = ui.getLoginField();
 			$(selector).html(loginFormHtml);
 		},
-		loadGameUI: function (selector) {
-			var list =
-				ui.gameUI(this.persister.nickname());
-			$(selector).html(list);
-
+		loadGalleryUI: function (selector) {
+		    this.persister.user.getAll(function (users) {
+		        var bla = users;
+		        var a = 1;
+		    });
+            // ---------- CONTINUE FROM HERE ------------
+			$(selector).hide();
+			$(selector).html(users);
+			$(selector).show(700);
 
 			this.persister.game.open(function (games) {
 				var list = ui.openGamesList(games);
@@ -50,18 +54,18 @@ var controllers = (function () {
 			var wrapper = $(selector);
 			var self = this;
 
-			wrapper.on("click", "#btn-show-login", function () {
-				wrapper.find(".button.selected").removeClass("selected");
-				$(this).addClass("selected");
-				wrapper.find("#login-form").show();
-				wrapper.find("#register-form").hide();
-			});
-			wrapper.on("click", "#btn-show-register", function () {
-				wrapper.find(".button.selected").removeClass("selected");
-				$(this).addClass("selected");
-				wrapper.find("#register-form").show();
-				wrapper.find("#login-form").hide();
-			});
+			//wrapper.on("click", "#btn-show-login", function () {
+			//	wrapper.find(".button.selected").removeClass("selected");
+			//	$(this).addClass("selected");
+			//	wrapper.find("#login-form").show();
+			//	wrapper.find("#register-form").hide();
+			//});
+			//wrapper.on("click", "#btn-show-register", function () {
+			//	wrapper.find(".button.selected").removeClass("selected");
+			//	$(this).addClass("selected");
+			//	wrapper.find("#register-form").show();
+			//	wrapper.find("#login-form").hide();
+			//});
 
 			wrapper.on("click", "#btn-login", function () {
 				var user = {
@@ -70,7 +74,8 @@ var controllers = (function () {
 				}
 
 				self.persister.user.login(user, function () {
-					self.loadGameUI(selector);
+				    $("#forms").fadeOut(700);
+					self.loadGalleryUI(selector);
 				}, function () {
 					wrapper.html("oh no..");
 				});
@@ -87,7 +92,7 @@ var controllers = (function () {
                     user,
                     function (data) {
                         $("#forms").hide("highlight", {}, 1000);
-                        self.loadGameUI(selector);
+                        self.loadGalleryUI(selector);
                     },
                     function (error) {
                         var errorObject = JSON.parse();

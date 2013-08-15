@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Runtime.Serialization;
+using System.Linq.Expressions;
 
 namespace Gallery.ASPNetWebAPI.Models
 {
@@ -15,6 +16,32 @@ namespace Gallery.ASPNetWebAPI.Models
 
         [DataMember(Name = "authCode")]
         public string AuthCode { get; set; }
+    }
+
+    [DataContract]
+    public class UserPreviewModel
+    {
+        [DataMember(Name = "username")]
+        public string Username { get; set; }
+
+        [DataMember(Name = "firstName")]
+        public string FirstName { get; set; }
+
+        [DataMember(Name = "lastName")]
+        public string LastName { get; set; }
+
+        public static Expression<Func<User, UserPreviewModel>> FromUser
+        {
+            get
+            {
+                return x => new UserPreviewModel
+                {
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    Username = x.Username
+                };
+            }
+        }
     }
 
     [DataContract]

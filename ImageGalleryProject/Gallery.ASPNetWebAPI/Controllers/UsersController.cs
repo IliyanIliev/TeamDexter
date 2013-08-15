@@ -71,6 +71,19 @@ namespace Gallery.ASPNetWebAPI.Controllers
             return responseMsg;
         }
 
+       [HttpGet]
+       [ActionName("all")]
+
+        public HttpResponseMessage PreviewUsers()
+        {
+            var responseMsg = this.PerformOperation(() =>
+                {
+                    var previewUsers = UsersRepository.GetAllUsers();
+                    return previewUsers;
+                });
+            return responseMsg;
+        }
+
         //[HttpGet]
         //[ActionName("scores")]
         //public HttpResponseMessage GetAllUsers(string sessionKey)

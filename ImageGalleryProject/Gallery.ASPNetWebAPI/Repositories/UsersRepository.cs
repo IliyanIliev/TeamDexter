@@ -187,5 +187,13 @@ namespace Gallery.Repositories
         //        return users.ToList();
         //    }
         //}
+
+        internal static IEnumerable<UserPreviewModel> GetAllUsers()
+        {
+            var context = new GalleryContext();
+            var result = context.Users.Select(UserPreviewModel.FromUser).ToList();
+
+            return result;
+        }
     }
 }

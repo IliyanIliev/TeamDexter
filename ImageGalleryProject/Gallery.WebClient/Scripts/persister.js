@@ -76,6 +76,12 @@ var persister = (function () {
                 success(data);
             }, error);
         },
+        getAll: function(success, error){
+            var url = this.rootUrl + "all";
+            httpRequester.getJSON(url, function (data) {
+                success(data);
+            }, error)
+        },
         scores: function (success, error) {
             var url = this.rootUrl + "scores/" + sessionKey;
             httpRequester.getJSON(url, success, error);
