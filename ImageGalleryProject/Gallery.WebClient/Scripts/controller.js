@@ -28,9 +28,9 @@ var controllers = (function () {
 		        var a = 1;
 		    });
             // ---------- CONTINUE FROM HERE ------------
-			$(selector).hide();
-			$(selector).html(users);
-			$(selector).show(700);
+			//$(selector).hide();
+			//$(selector).html(users);
+			//$(selector).show(700);
 
 			this.persister.game.open(function (games) {
 				var list = ui.openGamesList(games);
@@ -75,6 +75,7 @@ var controllers = (function () {
 
 				self.persister.user.login(user, function () {
 				    $("#forms").fadeOut(700);
+				    console.log("passed");
 					self.loadGalleryUI(selector);
 				}, function () {
 					wrapper.html("oh no..");
