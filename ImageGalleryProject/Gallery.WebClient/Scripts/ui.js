@@ -174,28 +174,42 @@ var ui = (function () {
           <span class="icon-bar"></span>\
           <span class="icon-bar"></span>\
           <span class="icon-bar"></span></a>';
-        html += '<a class="brand" href="#">' + localStorage.getItem("username") + '</a>';
+        html += '<a class="brand" id="usernameField" href="#">' + localStorage.getItem("username") + '</a>';
+//        html += '<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">\
+//          <span class="icon-bar"></span>\
+//          <span class="icon-bar"></span>\
+//          <span class="icon-bar"></span></a>\
+//';
+        //html += '<li class="divider-vertical"></li>';
         var usersLength = users.length;
-        html += '<div class="nav-collapse collapse navbar-responsive-collapse"><ul class="nav"><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">People<b.caret></b></a><ul class="dropdown-menu">';
+        html += '<div class="nav-collapse collapse navbar-responsive-collapse"><ul class="nav"><li><a href="#" id="btn-logout">log out</a></li><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">People<b class="caret"></b></a><ul class="dropdown-menu">';
+
         for (var i = 0; i < usersLength; i++) {
             html += '<li><a href="#" data-username="' + users[i].username + '" class="person">' + users[i].firstName + " " + users[i].lastName + "</a></li>";
         }
-     
+        html += "</ul>";
+        html+= "</li>";
+        //html += '<li class="divider-vertical"></li>';
+        html += '<input type="text" class="search-query span2" placeholder="folder name">';
+        html += '<li><a href="#">create folder</a></li></ul>';
+        html += '<ul class="nav pull-right"><li class="dropdown"><a href="#" clas="dropdown-toggle" data-toggle="dropdown">\
+            upload<b class="caret"></b></a><ul class="dropdown-menu"><li><button id="save" >Download</button></li><li><button id="uploadToDropbox">Upload to Dropbox </button></li></ul>'
         html += '</div></div></div></div></header>';
+
         return html;
     }
 
-    function generateTreeViewAlbums(albums, html) {
-        var count = albums.lenght;
-        html += '<li data-expanded="false">' + albums.title;
+    //function generateTreeViewAlbums(albums, html) {
+    //    var count = albums.lenght;
+    //    html += '<li data-expanded="false">' + albums.title;
 
-        for (var i = 0; i < count; i++) {
-            generateTreeViewAlbums(albums[i], html);
-        }
+    //    for (var i = 0; i < count; i++) {
+    //        generateTreeViewAlbums(albums[i], html);
+    //    }
 
 
-        html += '</li>'
-    }
+    //    html += '</li>';
+    //}
 
     function buildTreeViewUI(gallery) {
 
@@ -210,7 +224,7 @@ var ui = (function () {
 
         for (var i = 0; i < albumsLength; i++) {
             html += '<li class="ui-menu-item" role="presentation">';
-            html += '<a href="#" class="ui-corner-all" tabindex="-1" role="menuitem" data-album-id="' +
+            html += '<a href="#" class="ui-corner-all folder" tabindex="-1" role="menuitem" data-album-id="' +
                 albums[i].ID + '">' + albums[i].Title + '</a>';
             html += "</li>";
         }
@@ -220,7 +234,7 @@ var ui = (function () {
 
         for (var i = 0; i < imagesLength; i++) {
             html += '<li class="ui-menu-item" role="presentation">';
-            html += '<a href="#"  data-image-id="' + images[i].ID + '">' + images[i].Title + "</a>";
+            html += '<a href="#" class="image" data-image-id="' + images[i].ID + '">' + images[i].Title + "</a>";
             html += "</li>"
         }
 

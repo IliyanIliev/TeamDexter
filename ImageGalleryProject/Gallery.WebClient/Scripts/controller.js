@@ -31,6 +31,7 @@ var controllers = (function () {
 		    });
 		},
 		loadGallery: function (selector, gallery){
+		    $("#menu").remove();
 		    var html = ui.getTreeViewUI(gallery);
 		    $(selector).append(html);
 		},
@@ -98,7 +99,55 @@ var controllers = (function () {
                     });
 			});
 
+			wrapper.on("click", "#usernameField", function (ev) {
+			    var username = $(ev.target).text();
+			    self.persister.gallery.getSingle(
+                          username,
+                          function (data) {
+                              var gallery = data;
+                              self.loadGallery(selector, gallery);
+                          },
+                          function (errorData) {
+                          });
+			});
 
+			//document.getElementById("save").addEventListener("click", function (e) {
+			//    options = {
+
+			//        success: function (files) {
+			//            alert(files[0].link)
+			//        },
+
+			//        cancel: function () {
+
+			//        },
+			//        linkType: "direct",
+			//        multiselect: false,
+			//    }
+
+			//    Dropbox.choose(options);
+			//}, false);
+
+			//wrapper.on("click", "#uploadToDropbox", function (ev) {
+			//    options = {
+			//        files: [
+            //            {
+            //                'url': 'http://telerikacademy.com/Content/Images/news-img01.png',
+
+            //            },
+            //            {
+            //                'url': 'http://i1.ytimg.com/vi/5Awc2yw3G5A/0.jpg',
+            //            }
+
+			//        ],
+			//        success: function () { },
+			//        progress: function (progress) { },
+			//        cancel: function () { },
+			//        error: function (err) { }
+			//    }
+
+			//    Dropbox.save(options);
+			//}, false);
 
 			wrapper.on("click", "#open-games-container a", function () {
 				$("#game-join-inputs").remove();
