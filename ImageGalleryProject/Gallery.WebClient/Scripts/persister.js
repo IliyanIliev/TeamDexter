@@ -4,20 +4,20 @@
 // ------------------------------------------------NEEDS TO BE UPDATED!!!! ---------------------------------------------------------------
 var persister = (function () {
 
-    var nickname = localStorage.getItem("nickname");
+    var nickname = localStorage.getItem("username");
     var sessionKey = localStorage.getItem("sessionKey");
 
     function saveUserData(userData) {
-        localStorage.setItem("nickname", userData.nickname);
+        localStorage.setItem("username", userData.username);
         localStorage.setItem("sessionKey", userData.sessionKey);
-        nickname = userData.nickname;
+        username = userData.username;
         sessionKey = userData.sessionKey;
     }
 
     function clearUserData() {
-        localStorage.removeItem("nickname");
+        localStorage.removeItem("username");
         localStorage.removeItem("sessionKey");
-        nickname = "";
+        username = "";
         sessionKey = "";
     }
 
@@ -40,7 +40,7 @@ var persister = (function () {
 
     var UserPersister = Class.create({
         init: function (rootUrl) {
-            this.rootUrl = rootUrl + "user/";
+            this.rootUrl = rootUrl + "users/";
         },
         login: function (user, success, error) {
             var url = this.rootUrl + "login";
@@ -59,10 +59,10 @@ var persister = (function () {
             var url = this.rootUrl + "register";
             var userData = {
                 username: user.username,
-                nickname: user.nickname,
+                firstName: user.firstName,
+                lastName: user.lastName,
                 authCode: CryptoJS.SHA1(user.username + user.password).toString(),
             };
-
             httpRequester.postJSON(url, userData,
                 function (data) {
                     saveUserData(data);
@@ -81,7 +81,7 @@ var persister = (function () {
             httpRequester.getJSON(url, success, error);
         }
     });
-
+    
     var GamePersister = Class.create({
         init: function (url) {
             this.rootUrl = url + "game/";

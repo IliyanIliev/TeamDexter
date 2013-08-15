@@ -7,7 +7,7 @@ var controllers = (function () {
     var rootUrl = "http://localhost:7044/api/";
 	var Controller = Class.create({
 		init: function () {
-			this.persister = persisters.get(rootUrl);
+			this.persister =  persister.get(rootUrl);
 		},
 		loadUI: function (selector) {
 			if (this.persister.isUserLoggedIn()) {
@@ -19,7 +19,7 @@ var controllers = (function () {
 			this.attachUIEventHandlers(selector);
 		},
 		loadLoginFormUI: function (selector) {
-			var loginFormHtml = ui.loginForm()
+		    var loginFormHtml = ui.getLoginField();
 			$(selector).html(loginFormHtml);
 		},
 		loadGameUI: function (selector) {
@@ -77,7 +77,23 @@ var controllers = (function () {
 				return false;
 			});
 			wrapper.on("click", "#btn-register", function () {
-
+			    var user = {
+			        username: $(selector + " #tb-register-username").val(),
+			        password: $(selector + " #tb-register-password").val(),
+			        firstName: $(selector + " #tb-register-first-name").val(),
+			        lastName: $(selector + " #tb-register-last-name").val()
+			    };
+			    self.persister.user.register(
+                    user,
+                    function (data) {
+                        $("#forms").hide("highlight", {}, 1000);
+                        self.loadGameUI(selector);
+                    },
+                    function (error) {
+                        var errorObject = JSON.parse();
+                        $("#error-field").html(errorObject.Message);
+                    }
+                );
 			});
 			wrapper.on("click", "#btn-logout", function () {
 				self.persister.user.logout(function () {
@@ -133,7 +149,6 @@ var controllers = (function () {
 }());
 
 $(function () {
-    debugger
 	var controller = controllers.get();
 	controller.loadUI("#content");
 });

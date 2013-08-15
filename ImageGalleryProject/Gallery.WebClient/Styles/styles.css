@@ -1,0 +1,15 @@
+﻿body {
+}
+
+.btn{
+    display: block;
+}
+#forms {
+    display: inline-block;
+    margin: 0 auto;
+}
+
+#wrapper {
+    max-width: 50%;
+    margin-left: 25%;
+}

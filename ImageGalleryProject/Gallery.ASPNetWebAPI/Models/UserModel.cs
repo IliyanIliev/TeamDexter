@@ -28,16 +28,6 @@ namespace Gallery.ASPNetWebAPI.Models
     }
 
     [DataContract]
-    public class UserScore
-    {
-        [DataMember(Name = "nickname")]
-        public string Nickname { get; set; }
-
-        [DataMember(Name = "score")]
-        public decimal Score { get; set; }
-    }
-
-    [DataContract]
     public class UserLoggedModel
     {
         [DataMember(Name = "sessionKey")]

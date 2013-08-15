@@ -1,138 +1,184 @@
-﻿/// <reference path="class.js" />
-/// <reference path="persister.js" />
-/// <reference path="jquery-2.0.2.js" />
-/// <reference path="ui.js" />
+﻿/// <reference path="jquery-2.0.2.js" />
+var ui = (function () {
 
-var controllers = (function () {
-    var rootUrl = "http://localhost:7044/api/";
-    var Controller = Class.create({
-        init: function () {
-            this.persister = persisters.get(rootUrl);
-        },
-        loadUI: function (selector) {
-            if (this.persister.isUserLoggedIn()) {
-                this.loadGameUI(selector);
-            }
-            else {
-                this.loadLoginFormUI(selector);
-            }
-            this.attachUIEventHandlers(selector);
-        },
-        loadLoginFormUI: function (selector) {
-            var loginFormHtml = ui.loginForm()
-            $(selector).html(loginFormHtml);
-        },
-        loadGameUI: function (selector) {
-            var list =
-				ui.gameUI(this.persister.nickname());
-            $(selector).html(list);
+    function buildLoginField() {
+        return '<div id="forms">\
+                <h1>FasonTefter Gallery</h1>\
+            <ul class="nav nav-tabs">\
+                <li><a href="#login" data-toggle="tab">Log in</a></li>\
+                <li><a href="#register" data-toggle="tab">Register</a></li>\
+                <li id="error-field"></li>\
+            </ul>\
+            <div class="tab-content">\
+            <div class="tab-pane fade active in" id="login">\
+                <label for="tb-login-username">Username: </label>\
+                <input type="text" id="tb-login-username" data-toggle="tooltip" title="at least 4 characters" />\
+                <label for="tb-login-password">Password: </label>\
+                <input type="text" id="tb-login-password" />\
+                <button class="btn" id="btn-login">login</button>\
+            </div>\
+            <div class="tab-pane fade" id="register">\
+                <label for="tb-register-username">Username: </label>\
+                <input type="text" id="tb-register-username" />\
+                <label for="tb-register-first-name">First Name: </label>\
+                <input type="text" id="tb-register-first-name" />\
+                <label for="tb-register-last-name">Last Name: </label>\
+                <input type="text" id="tb-register-last-name" />\
+                <label for="tb-register-password">Password: </label>\
+                <input type="text" id="tb-register-password" />\
+                <button class="btn" id="btn-register">Register</button>\
+            </div>\
+            </div>\
+        </div>';
+    };
 
+    function buildGameContainer(nickname) {
+        return '<span id="login-info"><span id="user-nickname">Hello, ' + $("<div />").html(nickname).text() + '!</span>\
+                <button class="btn" id="btn-logout">Logout</button></span>\
+                <div id="create-game-holder">\
+                <label for="tb-create-title">New game title:</label> <input type="text" id="tb-create-title"/>\
+                <button id="btn-create-game">Create game</button></div>\
+                <div id="error-field"></div>\
+                <div id="open-games-wrapper"><h2>Open</h2>\
+                <div id="open-games-container"></div></div>\
+                <div id="active-games-wrapper"><h2>Active</h2>\
+                <div id="active-games-container"></div></div>\
+                <div id="game-field"></div>\
+                <div id="game-holder">\
+		        </div>\
+                <div id="messages-wrapper"><h2>Messages</h2>\
+                <div id="messages-holder">\
+                </div></div>\
+                <div id="scoreboard-wrapper"><h2>Scoreboard</h2>\
+                <div id="scores-holder">\
+                </div> </div>';
+    }
 
-            this.persister.game.open(function (games) {
-                var list = ui.openGamesList(games);
-                $(selector + " #open-games")
-					.html(list);
-            });
+    function buildOpenGames(games) {
+        var list = '<ul>';
 
-            this.persister.game.myActive(function (games) {
-                var list = ui.activeGamesList(games);
-                $(selector + " #active-games")
-					.html(list);
-            });
-        },
-        loadGame: function (selector, gameId) {
-            this.persister.game.state(gameId, function (gameState) {
-                var gameHtml = ui.gameState(gameState);
-                $(selector + " #game-holder").html(gameHtml)
-            });
-        },
-        attachUIEventHandlers: function (selector) {
-            var wrapper = $(selector);
-            var self = this;
+        for (var i = 0; i < games.length; i++) {
+            var game = games[i];
 
-            wrapper.on("click", "#btn-show-login", function () {
-                wrapper.find(".button.selected").removeClass("selected");
-                $(this).addClass("selected");
-                wrapper.find("#login-form").show();
-                wrapper.find("#register-form").hide();
-            });
-            wrapper.on("click", "#btn-show-register", function () {
-                wrapper.find(".button.selected").removeClass("selected");
-                $(this).addClass("selected");
-                wrapper.find("#register-form").show();
-                wrapper.find("#login-form").hide();
-            });
-
-            wrapper.on("click", "#btn-login", function () {
-                var user = {
-                    username: $(selector + " #tb-login-username").val(),
-                    password: $(selector + " #tb-login-password").val()
-                }
-
-                self.persister.user.login(user, function () {
-                    self.loadGameUI(selector);
-                }, function () {
-                    wrapper.html("oh no..");
-                });
-                return false;
-            });
-            wrapper.on("click", "#btn-register", function () {
-
-            });
-            wrapper.on("click", "#btn-logout", function () {
-                self.persister.user.logout(function () {
-                    self.loadLoginFormUI(selector);
-                });
-            });
-
-            wrapper.on("click", "#open-games-container a", function () {
-                $("#game-join-inputs").remove();
-                var html =
-					'<div id="game-join-inputs">' +
-						'Number: <input type="text" id="tb-game-number"/>' +
-						'Password: <input type="text" id="tb-game-pass"/>' +
-						'<button id="btn-join-game">join</button>' +
-					'</div>';
-                $(this).after(html);
-            });
-            wrapper.on("click", "#btn-join-game", function () {
-                var game = {
-                    number: $("#tb-game-number").val(),
-                    gameId: $(this).parents("li").first().data("game-id")
-                };
-
-                var password = $("#tb-game-pass").val();
-
-                if (password) {
-                    game.password = password;
-                }
-                self.persister.game.join(game);
-            });
-            wrapper.on("click", "#btn-create-game", function () {
-                var game = {
-                    title: $("#tb-create-title").val(),
-                    number: $("#tb-create-number").val(),
-                }
-                var password = $("#tb-create-pass").val();
-                if (password) {
-                    game.password = password;
-                }
-                self.persister.game.create(game);
-            });
-
-            wrapper.on("click", ".active-games .in-progress", function () {
-                self.loadGame(selector, $(this).parent().data("game-id"));
-            });
+            list += '<li data-game-id="' + $("<div />").html(game.id).text() + '">' + '<span>' + $("<div />").html(game.title).text() + '</span>' +
+                "<span> created by " + $("<div />").html(game.creator).text() + '</span><button class="btn-join-game">Join game</button></li>';
         }
-    });
-    return {
-        get: function () {
-            return new Controller();
+
+        list += "</ul>";
+
+        return list;
+    }
+
+    function buildActiveGames(games, nickname) {
+        var list = '<ul>';
+
+        for (var i = 0; i < games.length; i++) {
+            var game = games[i];
+
+            list += '<li data-game-id="' + $("<div />").html(game.id).text() + '">' + '<span>' + $("<div />").html(game.title).text() + '</span>' +
+                "<span> created by " + $("<div />").html(game.creator).text() + '</span>';
+            if (game.status == "in-progress") {
+                list += '<button class="btn-expand-game">Expand game</button>';
+            } else if (game.status == 'full' && game.creator == nickname) {
+                list += '<button class="btn-start-game">Start game</button>';
+            }
+
+            list += '</li>';
+        }
+
+        list += "</ul>";
+        return list;
+    }
+
+    function buildMessages(messages) {
+        var list = '<ul class="messages">';
+
+        for (var i = 0; i < messages.length; i++) {
+
+            var message = messages[i];
+
+            list += '<li class="' + $("<div />").html(message.type).text() + '">' + $("<div />").html(message.text).text() + '</li>';
+        }
+
+        list += '</ul>';
+        return list;
+    }
+
+    function buildScoresField(scoresObjects) {
+        var list = '<ul class="scores-list">';
+
+        for (var i = 0; i < scoresObjects.length; i++) {
+            var currentObject = scoresObjects[i];
+
+            list += '<li>Nickname: ' + $("<div />").html(currentObject.nickname).text() +
+                ', Score: ' + $("<div />").html(currentObject.score).text() + ' points</li>';
+        }
+        list += '</ul>';
+        return list;
+    }
+
+    function appendHeroes(owner) {
+
+        for (var i = 0; i < owner.units.length; i++) {
+
+            var unit = owner.units[i];
+
+            var currentRow = unit.position.x;
+            var currentColl = unit.position.y;
+
+            var square = '<a href="#" class="hero" data-unit-id="' + $("<div />").html(unit.id).text() + '">';
+            square += '<div class="characteristics">type: ' + $("<div />").html(unit.type).text() + '</div>';
+            square += '<div class="characteristics">att: ' + $("<div />").html(unit.attack).text() + '</div>';
+            square += '<div class="characteristics">def: ' + $("<div />").html(unit.armor).text() + '</div>';
+            square += '<div class="characteristics">health: ' + $("<div />").html(unit.hitPoints).text() + '</div>';
+            suqare = "</a>";
+
+            var element = $('#row' + currentColl + ' #coll' + currentRow);
+
+            element.html(square);
+            element.css("background", unit.owner);
+            element.css('color', '#fff');
         }
     }
-}());
 
-$(function () {
-    var controller = controllers.get();
-    controller.loadUI("#content");
-});
+    function buildGameField(game) {
+        var html = '<table border="1" cellspacing="5" cellpadding="5" data-game-id="' + $("<div />").html(game.gameId).text() + '">\
+        <tr>\
+            <th id="game-title">' + $("<div />").html(game.title).text() + '</th>\
+        </tr>\
+        <tr>\
+            <th class="player">' + $("<div />").html(game.red.nickname).text() + '</th>\
+            <th class="player">' + $("<div />").html(game.blue.nickname).text() + '</th>\
+        </tr>';
+
+        for (var i = 0; i < 9; i++) {
+            html += '<tr id="row' + i + '" data-row="' + i + '">';
+
+            for (var j = 0; j < 9; j++) {
+                html += '<td id="coll' + j + '" data-coll="' + j + '">';
+
+                html += '</td>';
+            }
+
+            html += '</tr>';
+        }
+
+        return html;
+    }
+
+    function buildHeroButtons() {
+
+    }
+
+    return {
+        getLoginField: buildLoginField,
+        getGameContainer: buildGameContainer,
+        getOpenGames: buildOpenGames,
+        getActiveGames: buildActiveGames,
+        getScores: buildScoresField,
+        getGameField: buildGameField,
+        getHeroes: appendHeroes,
+        getMessages: buildMessages,
+        getHeroButtons: buildHeroButtons
+    }
+})();

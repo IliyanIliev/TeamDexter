@@ -16,8 +16,8 @@ namespace Gallery.Repositories
 
         private const string ValidUsernameChars = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM_1234567890";
         private const string ValidNameChars = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
-        private const int MinUsernameNicknameChars = 4;
-        private const int MaxUsernameNicknameChars = 30;
+        private const int MinUsernameNameChars = 2;
+        private const int MaxUsernameNameChars = 30;
 
         private static void ValidateSessionKey(string sessionKey)
         {
@@ -47,7 +47,7 @@ namespace Gallery.Repositories
 
         private static void ValidateUsername(string username)
         {
-            if (username == null || username.Length < MinUsernameNicknameChars || username.Length > MaxUsernameNicknameChars)
+            if (username == null || username.Length < MinUsernameNameChars || username.Length > MaxUsernameNameChars)
             {
                 throw new ServerErrorException("Username should be between 4 and 30 symbols long", "INV_USRNAME_LEN");
             }
@@ -59,13 +59,13 @@ namespace Gallery.Repositories
 
         private static void ValidateName(string nickname)
         {
-            if (nickname == null || nickname.Length < MinUsernameNicknameChars || nickname.Length > MaxUsernameNicknameChars)
+            if (nickname == null || nickname.Length < MinUsernameNameChars || nickname.Length > MaxUsernameNameChars)
             {
-                throw new ServerErrorException("Nickname should be between 4 and 30 symbols long", "INV_NICK_LEN");
+                throw new ServerErrorException("Name should be between 2 and 30 symbols long", "INV_NICK_LEN");
             }
             else if (nickname.Any(ch => !ValidNameChars.Contains(ch)))
             {
-                throw new ServerErrorException("Nickname contains invalid characters", "INV_NICK_CHARS");
+                throw new ServerErrorException("Name contains invalid characters", "INV_NICK_CHARS");
             }
         }
 
