@@ -3,10 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.Serialization;
 using System.Web;
 
 namespace Gallery.ASPNetWebAPI.Models
 {
+    [DataContract]
     public class ImageModel
     {
         public int ID { get; set; }

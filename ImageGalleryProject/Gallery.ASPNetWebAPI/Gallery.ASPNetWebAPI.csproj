@@ -194,6 +194,7 @@
     <Compile Include="Repositories\EfRepository.cs" />
     <Compile Include="Repositories\GalleryContex.cs" />
     <Compile Include="Repositories\GalleryRepository.cs" />
+    <Compile Include="Repositories\ImagesRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
     <Compile Include="Repositories\UsersRepository.cs" />
