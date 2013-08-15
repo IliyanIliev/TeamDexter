@@ -76,6 +76,18 @@ namespace Gallery.ASPNetWebAPI.Controllers
         }
 
         [HttpPost]
+        [ActionName("getSingle")]
+        public HttpResponseMessage GetGallery([FromBody]string username)
+        {
+            var responseMsg = this.PerformOperation(() =>
+            {
+                var gallery = GalleryRepository.GetSingle(username);
+                return gallery;
+            });
+            return responseMsg;
+        }
+
+        [HttpPost]
         [ActionName("add")]
         public HttpResponseMessage AddGallery(string sessionKey)
         {

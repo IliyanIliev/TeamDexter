@@ -24,25 +24,31 @@ var controllers = (function () {
 		},
 		loadGalleryUI: function (selector) {
 		    this.persister.user.getAll(function (users) {
-		        ui.getGalleryUI
-		        var a = 1;
+		        var html = ui.getGalleryUI(users);
+		        $(selector).hide();
+		        $(selector).html(html);
+		        $(selector).fadeIn(700);
 		    });
             // ---------- CONTINUE FROM HERE ------------
 			//$(selector).hide();
 			//$(selector).html(users);
 			//$(selector).show(700);
 
-			this.persister.game.open(function (games) {
-				var list = ui.openGamesList(games);
-				$(selector + " #open-games")
-					.html(list);
-			});
+			//this.persister.game.open(function (games) {
+			//	var list = ui.openGamesList(games);
+			//	$(selector + " #open-games")
+			//		.html(list);
+			//});
 
-			this.persister.game.myActive(function (games) {
-				var list = ui.activeGamesList(games);
-				$(selector + " #active-games")
-					.html(list);
-			});
+			//this.persister.game.myActive(function (games) {
+			//	var list = ui.activeGamesList(games);
+			//	$(selector + " #active-games")
+			//		.html(list);
+			//});
+		},
+		loadGallery: function (selector, gallery){
+		    var html = ui.getTreeViewUI(gallery);
+		    $(selector).append(html);
 		},
 		loadGame: function (selector, gameId) {
 			this.persister.game.state(gameId, function (gameState) {
@@ -54,19 +60,6 @@ var controllers = (function () {
 			var wrapper = $(selector);
 			var self = this;
 
-			//wrapper.on("click", "#btn-show-login", function () {
-			//	wrapper.find(".button.selected").removeClass("selected");
-			//	$(this).addClass("selected");
-			//	wrapper.find("#login-form").show();
-			//	wrapper.find("#register-form").hide();
-			//});
-			//wrapper.on("click", "#btn-show-register", function () {
-			//	wrapper.find(".button.selected").removeClass("selected");
-			//	$(this).addClass("selected");
-			//	wrapper.find("#register-form").show();
-			//	wrapper.find("#login-form").hide();
-			//});
-
 			wrapper.on("click", "#btn-login", function () {
 				var user = {
 					username: $(selector + " #tb-login-username").val(),
@@ -76,7 +69,8 @@ var controllers = (function () {
 				self.persister.user.login(user, function () {
 				    $("#forms").fadeOut(700);
 				    console.log("passed");
-					self.loadGalleryUI(selector);
+
+				    self.loadGalleryUI(selector);
 				}, function () {
 					wrapper.html("oh no..");
 				});
@@ -105,6 +99,19 @@ var controllers = (function () {
 				self.persister.user.logout(function () {
 					self.loadLoginFormUI(selector);
 				});
+			});
+
+			wrapper.on("click", ".person", function (ev) {
+			    debugger;
+			    var username = $(ev.target).attr("data-username");
+			    self.persister.gallery.getSingle(
+                    username,
+                    function (data) {
+                        var gallery = data;
+                        self.loadGallery(selector, gallery);
+                    },
+                    function (errorData) {
+                    });
 			});
 
 			wrapper.on("click", "#open-games-container a", function () {

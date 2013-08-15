@@ -25,7 +25,7 @@ var persister = (function () {
         init: function (rootUrl) {
             this.rootUrl = rootUrl;
             this.user = new UserPersister(this.rootUrl);
-            this.game = new GamePersister(this.rootUrl);
+            this.gallery = new GalleryPersister(this.rootUrl);
             this.messages = new MessagesPersister(this.rootUrl);
             this.battle = new BattlePersister(this.rootUrl);
         },
@@ -51,6 +51,8 @@ var persister = (function () {
 
             httpRequester.postJSON(url, userData,
                 function (data) {
+
+                    data.username = userData.username;
                     saveUserData(data);
                     success(data);
                 }, error);
@@ -88,9 +90,17 @@ var persister = (function () {
         }
     });
     
-    var GamePersister = Class.create({
+    var GalleryPersister = Class.create({
         init: function (url) {
-            this.rootUrl = url + "game/";
+            this.rootUrl = url + "galleries/";
+        },
+        getSingle: function (username, success, error) {
+            var url = this.rootUrl + "getSingle";
+            var galleryUsername = username;
+
+            httpRequester.postJSON(url, galleryUsername, function (data) {
+                success(data);
+            }, error);
         },
         create: function (game, success, error) {
             var gameData = {

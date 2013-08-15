@@ -19,8 +19,6 @@ namespace Gallery.Models
 
         public string Url { get; set; }
 
-        public double Size { get; set; }
-
         public virtual ICollection<Comment> Comments { get; set; }
     }
 }

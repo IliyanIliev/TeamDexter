@@ -49,7 +49,6 @@ namespace Gallery.ASPNetWebAPI.Models
                 DateCreated = album.DateCreated,
                 DateModified = album.DateModified,
                 ID = album.ID,
-                Size = album.Size
             };
         }
 
@@ -60,7 +59,6 @@ namespace Gallery.ASPNetWebAPI.Models
                 ID = this.ID,
                 DateCreated = this.DateCreated,
                 DateModified = this.DateModified,
-                Size = this.Size,
                 Title = this.Title,
             };
         }

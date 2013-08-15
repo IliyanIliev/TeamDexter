@@ -23,9 +23,5 @@ namespace Gallery.Models
         public DateTime? DateCreated { get; set; }
 
         public DateTime? DateModified { get; set; }
-
-        public double Size { get; set; }
-
-
     }
 }

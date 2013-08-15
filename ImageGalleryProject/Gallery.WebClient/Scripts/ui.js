@@ -167,13 +167,74 @@ var ui = (function () {
     }
 
     function buildGalleryUI(users) {
+        var html = '<header><div class="navbar">\
+  <div class="navbar-inner">\
+    <div class="container">';
+        html += '<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">\
+          <span class="icon-bar"></span>\
+          <span class="icon-bar"></span>\
+          <span class="icon-bar"></span></a>\
+';
+        html += '<a class="brand" href="#">' + localStorage.getItem("username") + '</a>';
+    
+        var usersLength = users.length;
+        html += '<div class="nav-collapse collapse navbar-responsive-collapse"><ul class="nav"><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">People<b.caret></b></a><ul class="dropdown-menu">';
+        for (var i = 0; i < usersLength; i++) {
+            html += '<li><a href="#" data-username="' + users[i].username + '" class="person">' + users[i].firstName + " " + users[i].lastName + "</a></li>";
+        }
+        html += '</div></div></div></div></header>';
+        return html;
+    }
 
+    function generateTreeViewAlbums(albums, html) {
+        var count = albums.lenght;
+        html += '<li data-expanded="false">' + albums.title;
+
+        for (var i = 0; i < count; i++) {
+            generateTreeViewAlbums(albums[i], html);
+        }
+
+
+        html += '</li>'
+    }
+
+    function buildTreeViewUI(gallery) {
+
+        if (!gallery) {
+            return;
+        }
+
+        var html = '<ul id="menu" class="ui-menu ui-widget ui-widget-content ui-corner-all" role="menu" tabindex="0">';
+        var albumsLength = gallery.albums.length;
+
+        var albums = gallery.albums;
+
+        for (var i = 0; i < albumsLength; i++) {
+            html += '<li class="ui-menu-item" role="presentation">';
+            html += '<a href="#" class="ui-corner-all" tabindex="-1" role="menuitem" data-album-id="' +
+                albums[i].ID + '">' + albums[i].Title + '</a>';
+            html += "</li>";
+        }
+
+        var imagesLength = gallery.images.length;
+        var images = gallery.images;
+
+        for (var i = 0; i < imagesLength; i++) {
+            html += '<li class="ui-menu-item" role="presentation">';
+            html += '<a href="#"  data-image-id="' + images[i].ID + '">' + images[i].Title + "</a>";
+            html += "</li>"
+        }
+
+        //html += "</ul></li>";
+        html += "</ul>";
+        return html;
     }
 
 
     return {
         getLoginField: buildLoginField,
         getGalleryUI: buildGalleryUI,
+        getTreeViewUI: buildTreeViewUI,
 
         getGameContainer: buildGameContainer,
         getOpenGames: buildOpenGames,

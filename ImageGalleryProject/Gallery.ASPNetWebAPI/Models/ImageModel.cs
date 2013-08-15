@@ -29,7 +29,6 @@ namespace Gallery.ASPNetWebAPI.Models
                     Title = x.Title,
                     DateUploaded = x.DateUploaded,
                     Url = x.Url,
-                    Size = x.Size
                 };
             }
         }
@@ -40,7 +39,6 @@ namespace Gallery.ASPNetWebAPI.Models
             {
                 ID = image.ID,
                 DateUploaded = image.DateUploaded,
-                Size = image.Size,
                 Title = image.Title,
                 Url = image.Url
             };
@@ -51,7 +49,6 @@ namespace Gallery.ASPNetWebAPI.Models
             return new Image
             {
                 ID = this.ID,
-                Size = this.Size,
                 Title = this.Title,
                 Url = this.Url,
                 DateUploaded = this.DateUploaded
