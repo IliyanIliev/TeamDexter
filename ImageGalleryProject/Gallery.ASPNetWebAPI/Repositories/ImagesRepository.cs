@@ -87,7 +87,6 @@ namespace Gallery.ASPNetWebAPI.Repositories
                 {
                     ID = image.ID,
                     Title = image.Title,
-                    Size = image.Size,
                     Url = image.Url,
                     DateUploaded = image.DateUploaded
                 };
@@ -108,7 +107,6 @@ namespace Gallery.ASPNetWebAPI.Repositories
                 {
                     Title = image.Title,
                     Url = image.Url,
-                    Size = image.Size,
                     DateUploaded = image.DateUploaded
                 };
 
@@ -156,7 +154,6 @@ namespace Gallery.ASPNetWebAPI.Repositories
                 {
                     ID = img.ID,
                     Title = img.Title,
-                    Size = img.Size,
                     Url = img.Url,
                     DateUploaded = img.DateUploaded
                 };

@@ -25,37 +25,21 @@ var controllers = (function () {
 		loadGalleryUI: function (selector) {
 		    this.persister.user.getAll(function (users) {
 		        var html = ui.getGalleryUI(users);
-		        $(selector).hide();
+		        $(selector).hide(); // CAUSES ISSUES
 		        $(selector).html(html);
 		        $(selector).fadeIn(700);
 		    });
-            // ---------- CONTINUE FROM HERE ------------
-			//$(selector).hide();
-			//$(selector).html(users);
-			//$(selector).show(700);
-
-			//this.persister.game.open(function (games) {
-			//	var list = ui.openGamesList(games);
-			//	$(selector + " #open-games")
-			//		.html(list);
-			//});
-
-			//this.persister.game.myActive(function (games) {
-			//	var list = ui.activeGamesList(games);
-			//	$(selector + " #active-games")
-			//		.html(list);
-			//});
 		},
 		loadGallery: function (selector, gallery){
 		    var html = ui.getTreeViewUI(gallery);
 		    $(selector).append(html);
 		},
-		loadGame: function (selector, gameId) {
-			this.persister.game.state(gameId, function (gameState) {
-				var gameHtml = ui.gameState(gameState);
-				$(selector + " #game-holder").html(gameHtml)
-			});
-		},
+		//loadGame: function (selector, gameId) {
+		//	this.persister.game.state(gameId, function (gameState) {
+		//		var gameHtml = ui.gameState(gameState);
+		//		$(selector + " #game-holder").html(gameHtml)
+		//	});
+		//},
 		attachUIEventHandlers: function (selector) {
 			var wrapper = $(selector);
 			var self = this;
@@ -113,6 +97,8 @@ var controllers = (function () {
                     function (errorData) {
                     });
 			});
+
+
 
 			wrapper.on("click", "#open-games-container a", function () {
 				$("#game-join-inputs").remove();
