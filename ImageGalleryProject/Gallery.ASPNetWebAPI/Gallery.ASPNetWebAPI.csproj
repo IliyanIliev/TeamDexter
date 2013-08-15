@@ -182,8 +182,8 @@
     <Compile Include="Models\CommentFullModel.cs" />
     <Compile Include="Models\AlbumFullModel.cs" />
     <Compile Include="Models\GalleryFullModel.cs" />
-    <Compile Include="Models\GalleryModel.cs" />
     <Compile Include="Models\CommentModel.cs" />
+    <Compile Include="Models\GalleryModel.cs" />
     <Compile Include="Models\ImageFullModel.cs" />
     <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Models\ServerErrorException.cs" />
@@ -193,6 +193,7 @@
     <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\EfRepository.cs" />
     <Compile Include="Repositories\GalleryContex.cs" />
+    <Compile Include="Repositories\GalleryRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
     <Compile Include="Repositories\UsersRepository.cs" />
