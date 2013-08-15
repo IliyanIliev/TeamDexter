@@ -14,63 +14,6 @@ namespace Gallery.ASPNetWebAPI.Controllers
 {
     public class CommentsController : BaseApiController
     {
-        //private UnitOfWork unitOfWork;
-
-        //public CommentsController()
-        //{
-        //    this.unitOfWork = new UnitOfWork();
-        //}
-
-        //public CommentsController(UnitOfWork unitOfWork)
-        //{
-        //    this.unitOfWork = unitOfWork;
-        //}
-
-        //public IEnumerable<CommentModel> GetAll()
-        //{
-        //    return this.unitOfWork.CommentsRepository.All()
-        //        .Select(CommentModel.FromComment).ToList();
-        //}
-
-        //public CommentFullModel Get(int Id)
-        //{
-        //    var comment = this.unitOfWork.CommentsRepository.Get(Id);
-
-        //    CommentFullModel fullComment = CommentFullModel.CreateComment(comment);
-
-        //    return fullComment;
-        //}
-
-        //public HttpResponseMessage Post([FromBody] CommentFullModel fullComment)
-        //{
-        //    var comment = fullComment.CreateCommment();
-
-        //    this.unitOfWork.CommentsRepository.Add(comment);
-
-        //    HttpResponseMessage message = this.Request.CreateResponse(HttpStatusCode.Created);
-        //    message.Headers.Location =
-        //        new Uri(this.Request.RequestUri + comment.ID.ToString(CultureInfo.InvariantCulture));
-
-        //    return message;
-        //}
-
-        //public HttpResponseMessage Put(int Id, [FromBody]CommentFullModel fullComment)
-        //{
-        //    var comment = fullComment.CreateCommment();
-
-        //    this.unitOfWork.CommentsRepository.Update(Id, comment);
-
-        //    HttpResponseMessage message = this.Request.CreateResponse(HttpStatusCode.OK);
-        //    message.Headers.Location =
-        //        new Uri(this.Request.RequestUri + comment.ID.ToString(CultureInfo.InvariantCulture));
-
-        //    return message;
-        //}
-
-        //public void Delete(int Id)
-        //{
-        //    this.unitOfWork.CommentsRepository.Delete(Id);
-        //}
         [HttpGet]
         [ActionName("get")]
         public HttpResponseMessage GetComments(string sessionKey)
@@ -89,7 +32,8 @@ namespace Gallery.ASPNetWebAPI.Controllers
         {
             var responseMsg = this.PerformOperation(() =>
             {
-               CommentsRepository.CreateComment(comment.ImageId, comment.Text, sessionKey);
+                var userId = UsersRepository.LoginUser(sessionKey);
+                CommentsRepository.CreateComment(comment.ImageId, comment.Text, userId);
 
             });
             return responseMsg;

@@ -19,20 +19,20 @@ namespace Gallery.ASPNetWebAPI.Repositories
             return result;
         }
 
-        public static void CreateComment(int? imageId, string text, string sessionKey)
+        public static void CreateComment(int? imageId, string text, int userId)
         {
 
             using (GalleryContext context = new GalleryContext())
             {
-                var author = context.Users.Where(u => u.SessionKey == sessionKey).FirstOrDefault();
+                var author = context.Users.Find(userId);
+                var image = context.Images.Find(imageId);
                 var dbComment = new Gallery.Models.Comment()
                 {
                     Text=text,
                     Author=author,
-                    Image_ID = imageId
+                    Image = image
                 };
 
-                var userId = context.Users.Where(u => u.SessionKey == sessionKey).FirstOrDefault().ID;
                 context.Comments.Add(dbComment);
                 context.SaveChanges();
             }
