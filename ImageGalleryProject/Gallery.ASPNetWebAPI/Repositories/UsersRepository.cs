@@ -91,18 +91,13 @@ namespace Gallery.Repositories
                 var firstNameToLower = firstName.ToLower();
                 var lastNameToLower = lastName.ToLower();
 
-                var dbUser = context.Users.FirstOrDefault(u => u.Username.ToLower() == usernameToLower
-                    || u.FirstName.ToLower() == firstNameToLower || u.LastName.ToLower() == lastNameToLower);
+                var dbUser = context.Users.FirstOrDefault(u => u.Username.ToLower() == usernameToLower);
 
                 if (dbUser != null)
                 {
                     if (dbUser.Username.ToLower() == usernameToLower)
                     {
                         throw new ServerErrorException("Username already exists", "ERR_DUP_USR");
-                    }
-                    else
-                    {
-                        throw new ServerErrorException("Nickname already exists", "ERR_DUP_NICK");
                     }
                 }
 
