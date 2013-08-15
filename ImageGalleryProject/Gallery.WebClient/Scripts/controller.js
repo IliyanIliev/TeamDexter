@@ -24,7 +24,7 @@ var controllers = (function () {
 		},
 		loadGalleryUI: function (selector) {
 		    this.persister.user.getAll(function (users) {
-		        var bla = users;
+		        ui.getGalleryUI
 		        var a = 1;
 		    });
             // ---------- CONTINUE FROM HERE ------------

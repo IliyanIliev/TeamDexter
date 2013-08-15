@@ -166,12 +166,15 @@ var ui = (function () {
         return html;
     }
 
-    function buildHeroButtons() {
+    function buildGalleryUI(users) {
 
     }
 
+
     return {
         getLoginField: buildLoginField,
+        getGalleryUI: buildGalleryUI,
+
         getGameContainer: buildGameContainer,
         getOpenGames: buildOpenGames,
         getActiveGames: buildActiveGames,
@@ -179,6 +182,5 @@ var ui = (function () {
         getGameField: buildGameField,
         getHeroes: appendHeroes,
         getMessages: buildMessages,
-        getHeroButtons: buildHeroButtons
     }
 })();
