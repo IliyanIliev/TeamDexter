@@ -66,6 +66,14 @@ namespace Gallery.Repositories
                 context.Albums.Add(dbAlbum);
                 context.SaveChanges();
             }
+
+        }
+        internal static IEnumerable<AlbumPreviewModel> GetAllAlbums()
+        {
+            var context = new GalleryContext();
+            var result = context.Albums.Select(AlbumPreviewModel.FromAlbum).ToList();
+            
+            return result;
         }
     }
 }
