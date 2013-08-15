@@ -26,6 +26,7 @@ var persister = (function () {
             this.rootUrl = rootUrl;
             this.user = new UserPersister(this.rootUrl);
             this.gallery = new GalleryPersister(this.rootUrl);
+            this.album = new AlbumPersister(this.rootUrl);
             this.messages = new MessagesPersister(this.rootUrl);
             this.battle = new BattlePersister(this.rootUrl);
         },
@@ -162,6 +163,20 @@ var persister = (function () {
         all: function (success, error) {
             var url = this.rootUrl + "all/" + sessionKey;
             httpRequester.getJSON(url, success, error);
+        }
+    });
+
+    var AlbumPersister = Class.create({
+        init: function (url) {
+            this.rootUrl = url + "albums/";
+        },
+        create: function (albumName, success, error) {
+            var url = this.rootUrl + "create/" + sessionKey;
+            var albumData = {title: albumName};
+
+            httpRequester.postJSON(url, albumData, function (data) {
+                success(data);
+            }, error);
         }
     });
 

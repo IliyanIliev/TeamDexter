@@ -4,7 +4,7 @@
 /// <reference path="ui.js" />
 
 var controllers = (function () {
-    var rootUrl = "http://localhost:7044/api/";
+    var rootUrl = "http://teamdexterapp.apphb.com/api/";
 	var Controller = Class.create({
 		init: function () {
 			this.persister =  persister.get(rootUrl);
@@ -110,6 +110,14 @@ var controllers = (function () {
                           function (errorData) {
                           });
 			});
+
+			wrapper.on("click", "#btn-createFolder", function (ev) {
+			    var folderName = $("#folderName").val();
+			    self.persister.album.create(folderName, function (data) {
+			        alert("success");
+			    }, function (error) { });
+
+			})
 
 			//document.getElementById("save").addEventListener("click", function (e) {
 			//    options = {

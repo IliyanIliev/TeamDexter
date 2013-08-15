@@ -190,8 +190,8 @@ var ui = (function () {
         html += "</ul>";
         html+= "</li>";
         //html += '<li class="divider-vertical"></li>';
-        html += '<input type="text" class="search-query span2" placeholder="folder name">';
-        html += '<li><a href="#">create folder</a></li></ul>';
+        html += '<input type="text" class="search-query span2" placeholder="folder name" id="folderName">';
+        html += '<li><a href="#" id="btn-createFolder">create folder</a></li></ul>';
         html += '<ul class="nav pull-right"><li class="dropdown"><a href="#" clas="dropdown-toggle" data-toggle="dropdown">\
             upload<b class="caret"></b></a><ul class="dropdown-menu"><li><button id="save" >Download</button></li><li><button id="uploadToDropbox">Upload to Dropbox </button></li></ul>'
         html += '</div></div></div></div></header>';
